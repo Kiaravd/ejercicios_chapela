@@ -1,0 +1,7 @@
+C:\Users\kiara\source\repos\ejer07\bin\Debug\ejer07.exe.config
+C:\Users\kiara\source\repos\ejer07\bin\Debug\ejer07.exe
+C:\Users\kiara\source\repos\ejer07\bin\Debug\ejer07.pdb
+C:\Users\kiara\source\repos\ejer07\obj\Debug\ejer07.csproj.AssemblyReference.cache
+C:\Users\kiara\source\repos\ejer07\obj\Debug\ejer07.csproj.CoreCompileInputs.cache
+C:\Users\kiara\source\repos\ejer07\obj\Debug\ejer07.exe
+C:\Users\kiara\source\repos\ejer07\obj\Debug\ejer07.pdb
