@@ -1,0 +1,7 @@
+C:\Users\kiara\Desktop\ejercicios_chapela\ejer11\bin\Debug\ejer11.exe.config
+C:\Users\kiara\Desktop\ejercicios_chapela\ejer11\bin\Debug\ejer11.exe
+C:\Users\kiara\Desktop\ejercicios_chapela\ejer11\bin\Debug\ejer11.pdb
+C:\Users\kiara\Desktop\ejercicios_chapela\ejer11\obj\Debug\ejer11.1.csproj.AssemblyReference.cache
+C:\Users\kiara\Desktop\ejercicios_chapela\ejer11\obj\Debug\ejer11.1.csproj.CoreCompileInputs.cache
+C:\Users\kiara\Desktop\ejercicios_chapela\ejer11\obj\Debug\ejer11.exe
+C:\Users\kiara\Desktop\ejercicios_chapela\ejer11\obj\Debug\ejer11.pdb
