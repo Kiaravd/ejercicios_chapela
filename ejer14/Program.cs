@@ -1,88 +1,104 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Runtime.InteropServices;
+using System.Security.Policy;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace ejer14
+namespace ejerprueba
 {
     internal class Program
     {
         static void Main(string[] args)
         {
-            Console.WriteLine("Cuantos autos desea ingresar para la agencia?");
-            int num_autos = 0;
             try
             {
-                num_autos = Convert.ToInt32(Console.ReadLine());
-            }
-            catch (FormatException){ Console.WriteLine("El formato es incorrecto");}
-
-            agencia infoAgencia = new agencia( num_autos);
-            Console.WriteLine("Ingrese el nombre de la agencia:");
-            infoAgencia.Nombre = Console.ReadLine();
-            Console.WriteLine("Ingrese la dirección de la agencia:");
-            infoAgencia.Direccion = Console.ReadLine();
-            Console.WriteLine("Ingrese el nombre del titular de la agencia:");
-            infoAgencia.Titular = Console.ReadLine();
-            try
-            {
-                for (int i = 0; i < num_autos; i++)
+                Console.WriteLine("Información de la compañia");
+                Console.WriteLine("Cuantos autos posee la compañia?");
+                try
                 {
-                    Console.WriteLine("Marca del auto {0}: ", i + 1);
-                    infoAgencia.marca[i] = Console.ReadLine();
-                    Console.WriteLine("Año del auto {0}: ", i + 1);
-                    infoAgencia.año[i] = Convert.ToInt32(Console.ReadLine());
-                    Console.WriteLine("Modelo del auto {0}: ", i + 1);
-                    infoAgencia.modelo[i] = Console.ReadLine();
-                    Console.WriteLine("Peso del chasis {0}: ", i + 1);
-                    infoAgencia.peso_chasis[i] = Convert.ToInt32(Console.ReadLine());
-                }
-            }
-            catch (FormatException)
-            {
-                Console.WriteLine("Formato invalido");
-            }
+                    int cant = Convert.ToInt32(Console.ReadLine());
+                    Agencia agencia = new Agencia(cant);
+                    Console.WriteLine("Ingresar nombre de la agencia");
+                    agencia.Nombre = Console.ReadLine();
+                    Console.WriteLine("Ingresar dirección de la agencia");
+                    agencia.direccion = Console.ReadLine();
+                    Console.WriteLine("Ingresar titular de la agencia");
+                    agencia.titular = Console.ReadLine();
 
-            infoAgencia.Mostrar(num_autos);
+                    for (int i = 0; i < cant; i++)
+                    {
+                        Console.WriteLine("Marca del auto {0}", i + 1);
+                        agencia.Marca = Console.ReadLine();
+                        Console.WriteLine("Modelo del auto {0}", i + 1);
+                        agencia.Modelo = Console.ReadLine();
+                        Console.WriteLine("Año del auto {0}", i + 1);
+                        agencia.Año = Convert.ToInt32(Console.ReadLine());
+                        Console.WriteLine("Peso del chasis del auto {0}", i + 1);
+                        agencia.Peso = Convert.ToInt32(Console.ReadLine());
+
+                    }
+
+                    agencia.Mostrar();
+                }
+                catch (FormatException e) { Console.WriteLine(e.Message); }
+
+            }
+            catch (Exception ex) { Console.WriteLine(ex.Message); }
 
         }
-        public class agencia
+        public class Agencia
         {
-            public agencia(int cant) { marca = new string[cant]; modelo = new string[cant]; año = new int[cant]; peso_chasis = new int[cant]; }
-
+            public Agencia(int cant) { cant_autos = cant; marca = new string[cant]; modelo = new string[cant]; año = new int[cant]; peso_chasis = new int[cant]; }
             private string nombre;
-            private string direccion;
-            private string titular;
-            public string[] marca;
-            public string[] modelo;
-            public int[] año;
-            public int[] peso_chasis;
+            private int cant_autos;
+            private string[] marca;
+            private string[] modelo;
+            private int[] año;
+            private int[] peso_chasis;
+            int cant_privado = 0;
             public string Nombre
             {
                 set { nombre = value.ToUpper(); }
                 get { return nombre; }
             }
-            public string Direccion
+            public string direccion { get; set; }
+            public string titular { get; set; }
+            public string Marca
             {
-                set { direccion = value; }
-                get { return direccion; }
+                set { marca[cant_privado] = value; }
+                get { return marca[cant_privado]; }
             }
-            public string Titular
+            public string Modelo
             {
-                set { titular = value; }
-                get { return titular; }
+                set { modelo[cant_privado] = value; }
+                get { return modelo[cant_privado]; }
             }
-            public void Mostrar(int cant) {
-                int peso_tot = 0;
-                int autos_2021 = 0;
-                Console.WriteLine("Cantidad de autos: {0} ", cant);
-                for (int i = 0; i < peso_chasis.Length; i++) {peso_tot += peso_chasis[i]; }
-                Console.WriteLine("El peso total de los chasis es: {0} y el peso promedio es: {1}", peso_tot, (peso_tot / cant));
-                for (int i = 0;i < año.Length; i++) { if (año[i] >= 2021) { autos_2021++; } }
-                Console.WriteLine("Cantidad de autos mayores o iguales a 2021: {0}",autos_2021);
+            public int Año
+            {
+                set { año[cant_privado] = value; }
+                get { return año[cant_privado]; }
+            }
+            public int Peso
+            {
+                set { peso_chasis[cant_privado] = value; cant_privado++; }
+                get { return peso_chasis[cant_privado]; }
+            }
 
+            public void Mostrar()
+            {
+                int pesoTot = 0;
+                int cant2021 = 0;
+                for (int i = 0; i < peso_chasis.Length; i++) { pesoTot += peso_chasis[i]; }
+                for (int i = 0; i < año.Length; i++)
+                {
+                    if (año[i] >= 2021) { cant2021++; }
+                }
+                Console.WriteLine("Agencia {0} con direccion en {1} y el titular de esta es {2}", nombre, direccion, titular);
+                Console.WriteLine("Cantidad de autos en la agencia: {0}", cant_autos);
+                Console.WriteLine("Peso total de en chasis: {0}", pesoTot);
+                Console.WriteLine("Peso promedio de chasis: {0}", pesoTot / cant_autos);
+                Console.WriteLine("Cantidad de autos mayores o iguales a 2021: {0}", cant2021);
             }
         }
     }
